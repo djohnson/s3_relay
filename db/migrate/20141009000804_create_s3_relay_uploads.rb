@@ -1,7 +1,7 @@
 class CreateS3RelayUploads < ActiveRecord::Migration
   def change
     create_table :s3_relay_uploads do |t|
-      t.binary :uuid, length: 16
+      t.uuid :uuid, default: "uuid_generate_v4()", null: false
       t.integer :user_id
       t.string :parent_type
       t.integer :parent_id
@@ -9,7 +9,7 @@ class CreateS3RelayUploads < ActiveRecord::Migration
       t.text :filename
       t.string :content_type
       t.string :state
-      t.column :data, :json, default: "{}"
+      t.column :data, :jsonb, default: {}
       t.datetime :pending_at
       t.datetime :imported_at
 
