@@ -23,8 +23,12 @@ module S3Relay
       ENV["S3_RELAY_ACL"]
     end
 
+    def aws_s3_endpoint
+      region == "us-east-1" ? "s3" : "s3-#{region}"
+    end
+
     def endpoint
-      "https://#{bucket}.s3-#{region}.amazonaws.com"
+      "https://#{bucket}.#{aws_s3_endpoint}.amazonaws.com"
     end
 
     def digest
